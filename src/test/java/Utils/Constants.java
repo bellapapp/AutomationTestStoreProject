@@ -4,7 +4,11 @@ public class Constants {
 
     public static final String VALID_USERNAME = "TestFirstName.TestLastName";
 
+    public static final String INVALID_USERNAME = "FirstName.LastName";
+
     public static final String VALID_PASSWORD = "123456789101112";
+
+    public static final String WRONG_PASSWORD = "GCFGDGHHGC";
 
     public static final String VALID_USER_FIRSTNAME = "TestFirstName";
 

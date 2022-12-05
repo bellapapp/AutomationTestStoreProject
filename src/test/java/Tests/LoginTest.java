@@ -46,7 +46,62 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void validLoginNameForgot() throws InterruptedException {
+    public void invalidLoginWithValidUsernameEmptyPassword() {
+        homePage.clickOnLoginOrRegisterInHeader();
+        Assert.assertTrue(loginPage.verifyLoginNameIsEnabledAndSet(Constants.VALID_USERNAME));
+        loginPage.submitLogin();
+        Assert.assertFalse(myAccountPage.verifyMyAccountBoxIsDisplayed());
+        Assert.assertTrue(myAccountPage.verifyAlertErrorMessageIsDisplayed());
+    }
+
+    @Test
+    public void invalidLoginWithValidUsernameWrongPassword() {
+        homePage.clickOnLoginOrRegisterInHeader();
+        Assert.assertTrue(loginPage.verifyLoginNameIsEnabledAndSet(Constants.VALID_USERNAME));
+        Assert.assertTrue(loginPage.verifyPasswordIsEnabledAndSet(Constants.WRONG_PASSWORD));
+        loginPage.submitLogin();
+        Assert.assertFalse(myAccountPage.verifyMyAccountBoxIsDisplayed());
+        Assert.assertTrue(myAccountPage.verifyAlertErrorMessageIsDisplayed());
+    }
+
+    @Test
+    public void invalidLoginWithInvalidUsernameWrongPassword() {
+        homePage.clickOnLoginOrRegisterInHeader();
+        Assert.assertTrue(loginPage.verifyLoginNameIsEnabledAndSet(Constants.INVALID_USERNAME));
+        Assert.assertTrue(loginPage.verifyPasswordIsEnabledAndSet(Constants.WRONG_PASSWORD));
+        loginPage.submitLogin();
+        Assert.assertFalse(myAccountPage.verifyMyAccountBoxIsDisplayed());
+        Assert.assertTrue(myAccountPage.verifyAlertErrorMessageIsDisplayed());
+    }
+
+    @Test
+    public void invalidLoginWithEmptyUsernameWrongPassword() {
+        homePage.clickOnLoginOrRegisterInHeader();
+        Assert.assertTrue(loginPage.verifyPasswordIsEnabledAndSet(Constants.WRONG_PASSWORD));
+        loginPage.submitLogin();
+        Assert.assertFalse(myAccountPage.verifyMyAccountBoxIsDisplayed());
+        Assert.assertTrue(myAccountPage.verifyAlertErrorMessageIsDisplayed());
+    }
+
+    @Test
+    public void invalidLoginWithEmptyUsernameValidPassword() {
+        homePage.clickOnLoginOrRegisterInHeader();
+        Assert.assertTrue(loginPage.verifyPasswordIsEnabledAndSet(Constants.VALID_PASSWORD));
+        loginPage.submitLogin();
+        Assert.assertFalse(myAccountPage.verifyMyAccountBoxIsDisplayed());
+        Assert.assertTrue(myAccountPage.verifyAlertErrorMessageIsDisplayed());
+    }
+
+    @Test
+    public void invalidLoginWithEmptyUsernameAndPasswordFields() {
+        homePage.clickOnLoginOrRegisterInHeader();
+        loginPage.submitLogin();
+        Assert.assertFalse(myAccountPage.verifyMyAccountBoxIsDisplayed());
+        Assert.assertTrue(myAccountPage.verifyAlertErrorMessageIsDisplayed());
+    }
+
+    @Test
+    public void validForgotLoginName() throws InterruptedException {
         homePage.clickOnLoginOrRegisterInHeader();
         loginPage.clickOnForgotLogin();
         Assert.assertTrue(forgottenLoginNamePage.verifyForgottenFormLastNameIsEnabled());

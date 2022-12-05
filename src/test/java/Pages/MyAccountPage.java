@@ -21,6 +21,9 @@ public class MyAccountPage extends BasePage{
     @FindBy(css = ".alert-success")
     WebElement alertSuccess;
 
+    @FindBy(css = ".alert-error")
+    WebElement alertError;
+
     public MyAccountPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -51,6 +54,15 @@ public class MyAccountPage extends BasePage{
     public boolean verifyAlertSuccessMessageIsDisplayed() {
         try {
             return alertSuccess.isDisplayed();
+        }
+        catch (NoSuchElementException error) {
+            return false;
+        }
+    }
+
+    public boolean verifyAlertErrorMessageIsDisplayed() {
+        try {
+            return alertError.isDisplayed();
         }
         catch (NoSuchElementException error) {
             return false;
